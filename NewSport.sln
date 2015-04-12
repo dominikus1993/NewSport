@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewSport.Domain", "NewSport.Domain\NewSport.Domain.csproj", "{0342F2E1-6E2E-480B-AB9C-C46B27AFC00C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewSport.WebApi", "NewSport.WebApi\NewSport.WebApi.csproj", "{887EC6C4-DAD4-480B-B68F-389CB6D0EE44}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewSport.Tests", "NewSport.Tests\NewSport.Tests.csproj", "{4FA09436-E9DD-4624-A439-7BBDC1A24C57}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0342F2E1-6E2E-480B-AB9C-C46B27AFC00C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0342F2E1-6E2E-480B-AB9C-C46B27AFC00C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0342F2E1-6E2E-480B-AB9C-C46B27AFC00C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0342F2E1-6E2E-480B-AB9C-C46B27AFC00C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{887EC6C4-DAD4-480B-B68F-389CB6D0EE44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{887EC6C4-DAD4-480B-B68F-389CB6D0EE44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{887EC6C4-DAD4-480B-B68F-389CB6D0EE44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{887EC6C4-DAD4-480B-B68F-389CB6D0EE44}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FA09436-E9DD-4624-A439-7BBDC1A24C57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FA09436-E9DD-4624-A439-7BBDC1A24C57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FA09436-E9DD-4624-A439-7BBDC1A24C57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FA09436-E9DD-4624-A439-7BBDC1A24C57}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
