@@ -1,0 +1,11 @@
+﻿@model IQueryable<NewSport.Domain.Entity.Post>
+
+@{
+    ViewBag.Title = "title";
+}
+
+<h2>title</h2>
+@foreach (var post in Model)
+{
+    <div>@post.Date</div>
+}

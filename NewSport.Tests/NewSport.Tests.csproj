@@ -98,6 +98,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\NewSport.Domain\NewSport.Domain.csproj">
+      <Project>{0342f2e1-6e2e-480b-ab9c-c46b27afc00c}</Project>
+      <Name>NewSport.Domain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NewSport.WebApi\NewSport.WebApi.csproj">
       <Project>{887EC6C4-DAD4-480B-B68F-389CB6D0EE44}</Project>
       <Name>NewSport.WebApi</Name>
