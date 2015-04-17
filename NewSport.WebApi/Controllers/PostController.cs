@@ -17,9 +17,10 @@ namespace NewSport.WebApi.Controllers
         }
 
         // GET: Post
-        public ActionResult Index()
+        public ViewResult Index()
         {
-            return View(_postRepository.Posts);
+            var model = _postRepository.Posts.OrderBy(p => p.Id);
+            return View(model);
         }
     }
 }
