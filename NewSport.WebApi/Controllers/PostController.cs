@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using NewSport.Domain.Api;
+using NewSport.Domain.Entity;
 
 namespace NewSport.WebApi.Controllers
 {
@@ -21,6 +22,24 @@ namespace NewSport.WebApi.Controllers
         {
             var model = _postRepository.Posts.OrderBy(p => p.Id);
             return View(model);
+        }
+
+        //GET: Post
+        [HttpGet]
+        public ViewResult Add()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Add([Bind(Include = "Id,Title,Text,Date")] Post post)
+        {
+            if (ModelState.IsValid)
+            {
+                _postRepository.Save(post);
+                return RedirectToAction("Index");
+            }
+            return View(post);
         }
     }
 }

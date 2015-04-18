@@ -1,11 +1,28 @@
 ﻿@model IQueryable<NewSport.Domain.Entity.Post>
 
 @{
-    ViewBag.Title = "title";
+    ViewBag.Title = "Index";
 }
 
 <h2>title</h2>
-@foreach (var post in Model)
-{
-    <div>@post.Date</div>
-}
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Tytul</th>
+            <th>Tekst</th>
+            <th>Data</th>
+        </tr>
+    </thead>
+    <tbody>
+       @foreach (var post in Model)
+       {
+        <tr>
+            <td>@post.Id</td>
+            <td>@post.Title</td>
+            <td>@post.Text</td>
+            <td>@post.Date</td>
+        </tr>
+       } 
+    </tbody>
+</table>
