@@ -50,11 +50,11 @@ namespace NewSport.Tests.Controllers
 
         [TestMethod]
         public void AddInValidData()
-        {
+        {   
             Post post = new Post() {Title = "daadsdsa" };
+            _postController.ModelState.AddModelError("Text", "Text is required");
             ActionResult result = _postController.Add(post);
-            _postController.ModelState.AddModelError("error","error");
-            _mock.Verify(x => x.Save(post));
+            _mock.Verify(m=>m.Save(It.IsAny<Post>()),Times.Never);
             Assert.IsInstanceOfType(result, typeof(ViewResult));
         }
     }

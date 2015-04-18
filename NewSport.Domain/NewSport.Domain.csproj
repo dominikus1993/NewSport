@@ -53,7 +53,7 @@
     <Compile Include="Api\IPostRepository.cs" />
     <Compile Include="Concrete\DefaultDbContext.cs" />
     <Compile Include="Concrete\DefaultPostRepository.cs" />
-    <Compile Include="Entity\Post.cs" />
+    <Compile Include="Entities\Post.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

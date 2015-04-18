@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
@@ -44,17 +45,20 @@ namespace NewSport.WebApi.Controllers
             return View(post);
         }
 
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(Int32 id)
+
+        public ActionResult Delete(int? id)
         {
-            Post post = _postRepository.Posts.First(x => x.Id == id);
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Post post = _postRepository.FindById(id);
             if (post != null)
             {
                 _postRepository.Delete(post);
                 return RedirectToAction("Index");
             }
-            return RedirectToAction("Index");
+            return HttpNotFound();
         }
     }
 }
