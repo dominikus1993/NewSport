@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 using NewSport.Domain.Api;
 using NewSport.Domain.Entity;
 
@@ -32,6 +33,7 @@ namespace NewSport.WebApi.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Add([Bind(Include = "Id,Title,Text,Date")] Post post)
         {
             if (ModelState.IsValid)
@@ -40,6 +42,19 @@ namespace NewSport.WebApi.Controllers
                 return RedirectToAction("Index");
             }
             return View(post);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(Int32 id)
+        {
+            Post post = _postRepository.Posts.First(x => x.Id == id);
+            if (post != null)
+            {
+                _postRepository.Delete(post);
+                return RedirectToAction("Index");
+            }
+            return RedirectToAction("Index");
         }
     }
 }
