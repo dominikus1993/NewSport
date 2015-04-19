@@ -17,17 +17,21 @@ namespace NewSport.Tests.Controllers
     {
         private PostController _postController;
         private Mock<IPostRepository> _mock;
+        private List<Post> _posts;
+            
         [TestInitialize]
         public void Execute()
         {
-            _mock = new Mock<IPostRepository>();
-            _mock.Setup(repository => repository.Posts).Returns(new List<Post>()
+            _posts = new List<Post>()
             {
-                new Post(){Id = 1,Text = "Loren Ipsum no i co tam",Title = "Dominik Kotecki"},
-                new Post(){Id = 2,Text = "Loren Ipsum no i co tam 2",Title = "Dominik Kotecki 1"},
-                new Post(){Id = 3,Text = "Loren Ipsum no i co tam 3",Title = "Dominik Kotecki 2"},
-                new Post(){Id = 4,Text = "Loren Ipsum no i co tam 4",Title = "Dominik Kotecki 3"},
-            }.AsQueryable());
+                new Post() {Id = 1, Text = "Loren Ipsum no i co tam", Title = "Dominik Kotecki"},
+                new Post() {Id = 2, Text = "Loren Ipsum no i co tam 2", Title = "Dominik Kotecki 1"},
+                new Post() {Id = 3, Text = "Loren Ipsum no i co tam 3", Title = "Dominik Kotecki 2"},
+                new Post() {Id = 4, Text = "Loren Ipsum no i co tam 4", Title = "Dominik Kotecki 3"}
+            };
+            _mock = new Mock<IPostRepository>();
+            _mock.Setup(repository => repository.Posts).Returns(_posts.AsQueryable());
+            _mock.Setup(m => m.FindById(4)).Returns(_posts.Find(x => x.Id == 4));
             _postController = new PostController(_mock.Object);    
         }
 
@@ -56,6 +60,16 @@ namespace NewSport.Tests.Controllers
             ActionResult result = _postController.Add(post);
             _mock.Verify(m=>m.Save(It.IsAny<Post>()),Times.Never);
             Assert.IsInstanceOfType(result, typeof(ViewResult));
+        }
+
+        [TestMethod]
+        public void Delete()
+        {
+            var id = 4;
+            Post testPost = _posts.Find(x=>x.Id == id);
+            var result = _postController.Delete(4);
+            _mock.Verify(m=>m.Delete(testPost));
+            Assert.IsNotInstanceOfType(result, typeof(ViewResult));
         }
     }
 }

@@ -45,6 +45,25 @@ namespace NewSport.WebApi.Controllers
             return View(post);
         }
 
+        [HttpGet]
+        public ViewResult Edit(int? id)
+        {
+            Post post = _postRepository.FindById(id);
+            return View(post);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "Id,Title,Text,Date")]Post post)
+        {
+            if (ModelState.IsValid)
+            {
+                _postRepository.Save(post);
+                return RedirectToAction("Index");
+            }
+            return View(post);
+
+        }
 
         public ActionResult Delete(int? id)
         {
@@ -60,5 +79,6 @@ namespace NewSport.WebApi.Controllers
             }
             return HttpNotFound();
         }
+
     }
 }

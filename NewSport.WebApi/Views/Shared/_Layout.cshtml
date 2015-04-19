@@ -20,9 +20,19 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Home", "Index", "Post")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li class="dropdown">
+                        <a href="#" data-toggle="dropdown" class="dropdown-toggle">Posty <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Dodaj post","Add","Post")</li>
+                            <li><a href="#">Drafts</a></li>
+                            <li><a href="#">Sent Items</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">Trash</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>

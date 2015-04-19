@@ -23,6 +23,17 @@
             <td>@post.Title</td>
             <td>@post.Text</td>
             <td>@post.Date</td>
+            <td>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                        Action <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">@Html.ActionLink("Delete","Delete",new{post.Id})</a></li>
+                        <li><a href="#">@Html.ActionLink("Edit","Edit",new{post.Id})</a></li>                      
+                    </ul>
+                </div>
+            </td>
         </tr>
        } 
     </tbody>

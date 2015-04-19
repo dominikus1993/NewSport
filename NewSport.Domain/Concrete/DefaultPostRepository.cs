@@ -30,7 +30,7 @@ namespace NewSport.Domain.Concrete
             }
             else
             {
-                Post editingPost = _dbContext.Posts.Find(post.Id);
+                Post editingPost = FindById(post.Id);
                 if (editingPost != null)
                 {
                     editingPost.Text = post.Text;
