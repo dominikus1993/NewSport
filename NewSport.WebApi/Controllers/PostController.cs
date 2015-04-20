@@ -26,6 +26,20 @@ namespace NewSport.WebApi.Controllers
             return View(model);
         }
 
+        public ActionResult Get(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Post post = _postRepository.FindById(id);
+            if (post == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            return View(post);
+        }
+
         //GET: Post
         [HttpGet]
         public ViewResult Add()

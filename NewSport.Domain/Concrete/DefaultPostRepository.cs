@@ -30,12 +30,7 @@ namespace NewSport.Domain.Concrete
             }
             else
             {
-                Post editingPost = FindById(post.Id);
-                if (editingPost != null)
-                {
-                    editingPost.Text = post.Text;
-                    editingPost.Title = post.Title;   
-                }
+               Edit(post);
             }
             _dbContext.SaveChanges();
         }
@@ -49,6 +44,16 @@ namespace NewSport.Domain.Concrete
         public Post FindById(int? id)
         {
             return _dbContext.Posts.Find(id);
+        }
+
+        private void Edit(Post post)
+        {
+            Post editingPost = FindById(post.Id);
+            if (editingPost != null)
+            {
+                editingPost.Text = post.Text;
+                editingPost.Title = post.Title;
+            }
         }
     }
 }

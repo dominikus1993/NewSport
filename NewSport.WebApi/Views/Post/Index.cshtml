@@ -19,7 +19,7 @@
        @foreach (var post in Model)
        {
         <tr>
-            <td>@post.Id</td>
+            <td>@Html.ActionLink(@post.Id.ToString(),"Get",new{post.Id})</td>
             <td>@post.Title</td>
             <td>@post.Text</td>
             <td>@post.Date</td>

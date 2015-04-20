@@ -53,6 +53,47 @@ namespace NewSport.Tests.Controllers
         }
 
         [TestMethod]
+        public void CanNotEditPost()
+        {
+            var edit = _postController.Edit(5);
+            Post post = edit.ViewData.Model as Post;
+            Assert.IsNull(post);
+        }
+
+        [TestMethod]
+        public void CanEditPost()
+        {
+            var edit = _postController.Edit(4);
+            Post post = edit.ViewData.Model as Post;
+            Assert.AreEqual(4,post.Id);
+        }
+
+        [TestMethod]
+        public void CanNullIdGet()
+        {
+            var get = _postController.Get(null);
+            Assert.IsInstanceOfType(get, typeof(HttpStatusCodeResult));
+
+        }
+
+        [TestMethod]
+        public void CanNotGetPost()
+        {
+            var get = _postController.Get(14);
+            Assert.IsInstanceOfType(get,typeof(HttpStatusCodeResult));
+
+        }
+
+        [TestMethod]
+        public void CanGetPost()
+        {
+            var get = _postController.Get(4) as ViewResult;
+            Post post = (Post) get.ViewData.Model;
+            Assert.AreEqual(4,post.Id);
+
+        }
+
+        [TestMethod]
         public void AddInValidData()
         {   
             Post post = new Post() {Title = "daadsdsa" };
