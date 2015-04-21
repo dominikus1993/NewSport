@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using NewSport.Domain.Entities;
 
 namespace NewSport.Domain.Entity
 {
@@ -14,7 +15,7 @@ namespace NewSport.Domain.Entity
         {
             Date = DateTime.Now;
         }
-
+        
         [HiddenInput(DisplayValue = false)]
         public Int32 Id { get; set; }
        
@@ -27,7 +28,6 @@ namespace NewSport.Domain.Entity
         public String Text { get; set; }
 
         public DateTime Date { get; private set; }
-
 
         public override string ToString()
         {

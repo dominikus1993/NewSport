@@ -12,11 +12,13 @@ namespace NewSport.WebApi.Controllers
 {
     public class PostController : Controller
     {
-        private IPostRepository _postRepository;
+        private readonly IPostRepository _postRepository;
+        private readonly IUserRepository _userRepository;
 
-        public PostController(IPostRepository postRepository)
+        public PostController(IPostRepository postRepository, IUserRepository userRepository)
         {
             _postRepository = postRepository;
+            _userRepository = userRepository;
         }
 
         // GET: Post

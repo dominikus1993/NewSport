@@ -8,6 +8,7 @@ using System.Web.Routing;
 using Moq;
 using NewSport.Domain.Api;
 using NewSport.Domain.Concrete;
+using NewSport.Domain.Entities;
 using NewSport.Domain.Entity;
 using Ninject;
 
@@ -29,7 +30,8 @@ namespace NewSport.WebApi.Infrastructure
         }
 
         private void AdBindings()
-        {         
+        {
+            _defaultKernel.Bind<IUserRepository>().To<DefaultUserRepository>();
             _defaultKernel.Bind<IPostRepository>().To<DefaultPostRepository>();
         }
     }
