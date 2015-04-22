@@ -10,7 +10,7 @@ namespace NewSport.Domain.Concrete
 {
     public class DefaultPostRepository:IPostRepository
     {
-        private DefaultDbContext _dbContext;
+        private readonly DefaultDbContext _dbContext;
 
         public DefaultPostRepository()
         {
@@ -43,7 +43,7 @@ namespace NewSport.Domain.Concrete
 
         public Post FindById(int? id)
         {
-            return _dbContext.Posts.Find(id);
+            return _dbContext.Posts.FirstOrDefault(x=>x.Id == id);
         }
 
         private void Edit(Post post)

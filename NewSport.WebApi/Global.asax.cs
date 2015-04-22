@@ -18,6 +18,7 @@ namespace NewSport.WebApi
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             ControllerBuilder.Current.SetControllerFactory(new NewSportControllerFactory());
+            DependencyResolver.SetResolver(new DefaultDependencyResolver());
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,6 +29,11 @@ namespace NewSport.Domain.Entity
         public String Text { get; set; }
 
         public DateTime Date { get; private set; }
+
+        public int? AuthorId { get; set; }
+
+        [ForeignKey("AuthorId")]
+        public User Author { get; set; }
 
         public override string ToString()
         {

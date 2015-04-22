@@ -7,13 +7,13 @@ namespace NewSport.Domain.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class InitialCreate : IMigrationMetadata
+    public sealed partial class addAuthorIdField : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialCreate));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(addAuthorIdField));
         
         string IMigrationMetadata.Id
         {
-            get { return "201504211557370_InitialCreate"; }
+            get { return "201504221819545_addAuthorIdField"; }
         }
         
         string IMigrationMetadata.Source

@@ -86,7 +86,7 @@ namespace NewSport.Tests.Controllers
 
         [TestMethod]
         public void CanGetPost()
-        {
+        {         
             var get = _postController.Get(4) as ViewResult;
             Post post = (Post) get.ViewData.Model;
             Assert.AreEqual(4,post.Id);
