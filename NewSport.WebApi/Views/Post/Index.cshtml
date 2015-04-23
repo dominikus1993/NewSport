@@ -1,4 +1,4 @@
-﻿@model IQueryable<NewSport.Domain.Entity.Post>
+﻿@model IEnumerable<NewSport.Domain.Entity.Post>
 
 @{
     ViewBag.Title = "Index";
@@ -12,6 +12,7 @@
             <th>Tytul</th>
             <th>Tekst</th>
             <th>Data</th>
+            <th>Autor</th>
             <th>Akcje</th>
         </tr>
     </thead>
@@ -20,9 +21,10 @@
        {
         <tr>
             <td>@Html.ActionLink(@post.Id.ToString(),"Get",new{post.Id})</td>
-            <td>@post.Title</td>
-            <td>@post.Text</td>
-            <td>@post.Date</td>
+            <td>@Html.DisplayFor(m=>post.Title)</td>
+            <td>@Html.DisplayFor(m => post.Text)</td>
+            <td>@Html.DisplayFor(m => post.Date)</td>
+            <td>@Html.DisplayFor(m=>post.Author.Username)</td>
             <td>
                 <div class="btn-group">
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">

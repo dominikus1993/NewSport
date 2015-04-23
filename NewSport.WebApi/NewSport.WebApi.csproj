@@ -130,6 +130,7 @@
     </Compile>
     <Compile Include="Infrastructure\DefaultDependencyResolver.cs" />
     <Compile Include="Infrastructure\NewSportControllerFactory.cs" />
+    <Compile Include="Models\PagingInfo.cs" />
     <Compile Include="Models\PostViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

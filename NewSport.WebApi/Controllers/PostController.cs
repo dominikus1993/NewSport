@@ -21,10 +21,11 @@ namespace NewSport.WebApi.Controllers
             _userRepository = userRepository;
         }
 
+
         // GET: Post
         public ViewResult Index()
         {
-            var model = _postRepository.Posts.OrderBy(p => p.Id);
+            var model = _postRepository.Posts.ToList();
             return View(model);
         }
 
@@ -55,6 +56,7 @@ namespace NewSport.WebApi.Controllers
         {
             if (ModelState.IsValid)
             {
+                post.AuthorId = 1;
                 _postRepository.Save(post);
                 return RedirectToAction("Index");
             }

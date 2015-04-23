@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,7 +20,7 @@ namespace NewSport.Domain.Concrete
 
         public IQueryable<Post> Posts
         {
-            get { return _dbContext.Posts; }
+            get { return _dbContext.Posts.Include(u=>u.Author); }
         }
 
         public void Save(Post post)
