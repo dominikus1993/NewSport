@@ -21,23 +21,24 @@ namespace NewSport.WebApi.Controllers
         {
             _postRepository = postRepository;
             _userRepository = userRepository;
-            PageSize = 4;
+            PageSize = 10;
         }
 
 
         // GET: Post
         public ViewResult Index(int page = 1)
         {
-            PostViewModel viewModel = new PostViewModel
+            PostViewModel viewModel = new PostViewModel()
             {
-                Posts = _postRepository.Posts.OrderBy(x => x.Id).Skip((page - 1) * PageSize).Take(PageSize).ToList(),
-                PagingInfo =
+                Posts = _postRepository.Posts.OrderBy(x=>x.Id).Skip((page - 1) * PageSize).Take(PageSize),
+                PagingInfo = new PagingInfo()
                 {
                     CurrentPage = page,
                     PostsPerPage = PageSize,
                     TotalPosts = _postRepository.Posts.Count()
                 }
             };
+          
             return View(viewModel);
         }       
         public ActionResult Get(int? id)

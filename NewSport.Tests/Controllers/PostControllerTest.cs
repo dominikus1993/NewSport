@@ -10,6 +10,7 @@ using NewSport.Domain.Api;
 using NewSport.Domain.Entities;
 using NewSport.Domain.Entity;
 using NewSport.WebApi.Controllers;
+using NewSport.WebApi.Models;
 
 namespace NewSport.Tests.Controllers
 {
@@ -52,9 +53,8 @@ namespace NewSport.Tests.Controllers
         [TestMethod]
         public void Index()
         {
-            var result = (List<Post>)_postController.Index().Model;
-            Post[] posts = result.ToArray();
-            Assert.AreEqual(4,posts.Length);
+            var result = _postController.Index().Model as PostViewModel;
+            Assert.AreEqual(4,result.Posts.Count());
         }
 
         [TestMethod]

@@ -13,7 +13,7 @@ namespace NewSport.WebApi.HtmlHelpers
         public static MvcHtmlString PostLinks(this HtmlHelper helper,PagingInfo pagingInfo,Func<int,string> pageurl )
         {
             StringBuilder builder = new StringBuilder();
-            for (int i = 0; i < pagingInfo.TotalPages(); i++)
+            for (int i = 1; i <= pagingInfo.TotalPages; i++)
             {
                 TagBuilder tagBuilder = new TagBuilder("a");
                 tagBuilder.MergeAttribute("href",pageurl(i));
