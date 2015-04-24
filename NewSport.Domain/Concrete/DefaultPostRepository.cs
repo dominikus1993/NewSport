@@ -47,6 +47,12 @@ namespace NewSport.Domain.Concrete
             return _dbContext.Posts.FirstOrDefault(x=>x.Id == id);
         }
 
+        public IQueryable<Post> FindByUser(string username)
+        {
+            var posts = _dbContext.Posts.Include(u=>u.Author);
+            return posts.Where(x => x.Author.Username == username);
+        }
+
         private void Edit(Post post)
         {
             Post editingPost = FindById(post.Id);

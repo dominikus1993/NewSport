@@ -13,5 +13,6 @@ namespace NewSport.Domain.Api
         void Save(Post post);
         void Delete(Post post);
         Post FindById(int? id);
+        IQueryable<Post> FindByUser(string username);
     }
 }

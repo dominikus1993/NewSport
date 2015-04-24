@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.Web.UI.WebControls;
 using NewSport.Domain.Api;
 using NewSport.Domain.Entity;
+using NewSport.WebApi.Models;
 
 namespace NewSport.WebApi.Controllers
 {
@@ -14,21 +15,31 @@ namespace NewSport.WebApi.Controllers
     {
         private readonly IPostRepository _postRepository;
         private readonly IUserRepository _userRepository;
+        public int PageSize { get; private set; }
 
         public PostController(IPostRepository postRepository, IUserRepository userRepository)
         {
             _postRepository = postRepository;
             _userRepository = userRepository;
+            PageSize = 4;
         }
 
 
         // GET: Post
-        public ViewResult Index()
+        public ViewResult Index(int page = 1)
         {
-            var model = _postRepository.Posts.ToList();
-            return View(model);
-        }
-
+            PostViewModel viewModel = new PostViewModel
+            {
+                Posts = _postRepository.Posts.OrderBy(x => x.Id).Skip((page - 1) * PageSize).Take(PageSize).ToList(),
+                PagingInfo =
+                {
+                    CurrentPage = page,
+                    PostsPerPage = PageSize,
+                    TotalPosts = _postRepository.Posts.Count()
+                }
+            };
+            return View(viewModel);
+        }       
         public ActionResult Get(int? id)
         {
             if (id == null)
@@ -38,7 +49,7 @@ namespace NewSport.WebApi.Controllers
             Post post = _postRepository.FindById(id);
             if (post == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return HttpNotFound();
             }
             return View(post);
         }

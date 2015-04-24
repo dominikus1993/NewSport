@@ -7,7 +7,7 @@ using NewSport.Domain.Entity;
 
 namespace NewSport.WebApi.Models
 {
-    class PostViewModel
+    public class PostViewModel
     {
         public IEnumerable<Post> Posts { get; set; }
         public PagingInfo PagingInfo { get; set; }

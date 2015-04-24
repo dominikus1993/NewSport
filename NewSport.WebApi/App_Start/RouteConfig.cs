@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using NewSport.Domain.Entities;
 
 namespace NewSport.WebApi
 {
@@ -18,6 +19,11 @@ namespace NewSport.WebApi
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Post", action = "Index", id = UrlParameter.Optional }
             );
+            routes.MapRoute(
+                name:"",
+                url:"Page/{username}",
+                defaults: new {controller="Post",action="Index"}
+                );
         }
     }
 }

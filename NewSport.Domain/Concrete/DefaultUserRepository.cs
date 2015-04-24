@@ -65,5 +65,10 @@ namespace NewSport.Domain.Concrete
         {
             return _dbContext.Users.FirstOrDefault(x => x.Username == username);
         }
+
+        public void Delete(int? id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

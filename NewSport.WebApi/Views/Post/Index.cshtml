@@ -1,4 +1,4 @@
-﻿@model IEnumerable<NewSport.Domain.Entity.Post>
+﻿@model NewSport.WebApi.Models.PostViewModel
 
 @{
     ViewBag.Title = "Index";
@@ -7,36 +7,40 @@
 <h2>title</h2>
 <table class="table">
     <thead>
-        <tr>
-            <th>Id</th>
-            <th>Tytul</th>
-            <th>Tekst</th>
-            <th>Data</th>
-            <th>Autor</th>
-            <th>Akcje</th>
-        </tr>
+    <tr>
+        <th>Id</th>
+        <th>Tytul</th>
+        <th>Tekst</th>
+        <th>Data</th>
+        <th>Autor</th>
+        <th>Akcje</th>
+    </tr>
     </thead>
     <tbody>
-       @foreach (var post in Model)
-       {
+    @foreach (var post in Model.Posts)
+    {
         <tr>
-            <td>@Html.ActionLink(@post.Id.ToString(),"Get",new{post.Id})</td>
-            <td>@Html.DisplayFor(m=>post.Title)</td>
+            <td>@Html.ActionLink(@post.Id.ToString(), "Get", new {post.Id})</td>
+            <td>@Html.DisplayFor(m => post.Title)</td>
             <td>@Html.DisplayFor(m => post.Text)</td>
             <td>@Html.DisplayFor(m => post.Date)</td>
-            <td>@Html.DisplayFor(m=>post.Author.Username)</td>
+            <td>@Html.DisplayFor(m => post.Author.Username)</td>
             <td>
                 <div class="btn-group">
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                         Action <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">@Html.ActionLink("Delete","Delete",new{post.Id})</a></li>
-                        <li><a href="#">@Html.ActionLink("Edit","Edit",new{post.Id})</a></li>                      
+                        <li><a href="#">@Html.ActionLink("Delete", "Delete", new {post.Id})</a></li>
+                        <li><a href="#">@Html.ActionLink("Edit", "Edit", new {post.Id})</a></li>
                     </ul>
                 </div>
             </td>
         </tr>
-       } 
+    }
     </tbody>
 </table>
+
+<div class="pager">
+    @Html.PostLinks(Model.PagingInfo,x=>Url.Action("Index",new{page = x}))
+</div>
