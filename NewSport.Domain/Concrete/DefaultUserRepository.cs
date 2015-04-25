@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Security;
@@ -26,8 +27,10 @@ namespace NewSport.Domain.Concrete
 
         public void Save(User user)
         {
+            MD5 encrypter = MD5.Create();
             if (user.Id == 0)
             {
+                user.Password = encrypter.ComputeHash(Encoding.Default.GetBytes(user.Password)).ToString();
                 _dbContext.Users.Add(user);
             }
             else

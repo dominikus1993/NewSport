@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Web;
 using System.Web.Mvc;
 using NewSport.Domain.Api;
@@ -48,6 +49,22 @@ namespace NewSport.WebApi.Controllers
                 }
             }
             return View();
+        }
+
+        [HttpGet]
+        public ActionResult SignIn()
+        {
+            return View();
+        }
+
+        public ActionResult SignIn([Bind(Include = "Username,Email,Password")]User user )
+        {
+            if (ModelState.IsValid)
+            {
+                _userRepository.Save(user);
+                return RedirectToAction("Index", "Post");
+            }
+            return View(user);
         }
     }
 }

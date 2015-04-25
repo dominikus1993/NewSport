@@ -179,6 +179,7 @@
     <None Include="Views\Post\Get.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\User\SignUp.cshtml" />
+    <Content Include="Views\User\SignIn.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

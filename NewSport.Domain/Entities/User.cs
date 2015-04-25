@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,13 +16,15 @@ namespace NewSport.Domain.Entities
         [HiddenInput(DisplayValue = false)]
         public Int32 Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Nazwa użytkownia jest wymagana")]
+        [Index(IsUnique = true)]
         public String Username { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Email jest wymagany")]
+        [Index(IsUnique = true)]
         public String Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Hasło jest wymagane")]
         [DataType(DataType.Password)]
         public String Password { get; set; }
 

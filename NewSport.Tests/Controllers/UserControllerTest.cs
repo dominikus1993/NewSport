@@ -24,7 +24,7 @@ namespace NewSport.Tests.Controllers
         {
             _users = new List<User>()
             {
-                new User(){Username = "username",Password = "password"}
+                new User(){Id = 1,Username = "username",Email = "email@p.pl",Password = "password"}
             };
             _mock = new Mock<IUserRepository>();
             _mock.Setup(u => u.Users).Returns(_users.AsQueryable());
@@ -53,6 +53,34 @@ namespace NewSport.Tests.Controllers
             };
             var result = _userController.SignUp(viewModel);
             Assert.IsNotInstanceOfType(result, typeof(RedirectToRouteResult));
+        }
+
+        [TestMethod]
+        public void RegisterTestWithValidData()
+        {
+            User user = new User()
+            {
+                Id = 1,
+                Email = "email@p.pl",
+                Username = "email",
+                Password = "password"
+            };
+            var result = _userController.SignIn(user);
+            _mock.Verify(repository => repository.Save(user));
+            Assert.IsInstanceOfType(result,typeof(RedirectToRouteResult));
+        }
+
+        [TestMethod]
+        public void RegisterTestWithInValidData()
+        {
+            User user = new User()
+            {
+                Id = 1,
+                Password = "password"
+            };
+            var result = _userController.SignIn(user);
+            _mock.Verify(repository => repository.Save(It.IsAny<User>()), Times.Never);
+            Assert.IsInstanceOfType(result, typeof(ViewResult));
         }
     }
 }
