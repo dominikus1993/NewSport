@@ -53,8 +53,8 @@ namespace NewSport.Tests.Controllers
         [TestMethod]
         public void Index()
         {
-            var result = _postController.Index().Model as PostViewModel;
-            Assert.AreEqual(4,result.Posts.Count());
+            var result = _postController.Index(null,1).Model as PostViewModel;
+            Assert.AreEqual(4,result.PagingInfo.TotalPosts);
         }
 
         [TestMethod]

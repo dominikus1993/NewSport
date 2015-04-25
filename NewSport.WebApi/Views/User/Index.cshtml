@@ -1,0 +1,11 @@
+﻿@model IEnumerable<NewSport.Domain.Entities.User>
+
+@{
+    ViewBag.Title = "dupa";
+}
+
+<h2>@ViewBag.Title</h2>
+@foreach (var user in Model)
+{
+    <div>@user.Username</div>
+}

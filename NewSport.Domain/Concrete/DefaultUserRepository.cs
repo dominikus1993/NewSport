@@ -48,7 +48,7 @@ namespace NewSport.Domain.Concrete
 
         public bool LogIn(string username, string password)
         {
-            bool loginResult = FormsAuthentication.Authenticate(username, password);
+            bool loginResult = Users.Any(x => x.Username == username && x.Password == password);
             if (loginResult)
             {
                 FormsAuthentication.SetAuthCookie(username, false);

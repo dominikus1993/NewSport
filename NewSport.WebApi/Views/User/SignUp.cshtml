@@ -1,0 +1,13 @@
+﻿@model NewSport.WebApi.Models.LoginViewModel
+
+@{
+    ViewBag.Title = "Logowanie";
+}
+
+<h2>title</h2>
+@using (@Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    @Html.EditorForModel()
+    <p><input type="submit" value="Zaloguj sie"/></p>
+}

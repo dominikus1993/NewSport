@@ -16,14 +16,32 @@ namespace NewSport.WebApi
 
             routes.MapRoute(
                 name: "",
+                url:"",
+                defaults: new { controller = "Post", action = "Index",page = 1,username = (string)null }
+            );
+
+            routes.MapRoute(
+                name: "",
                 url: "Page/{page}",
-                defaults: new { controller = "Post", action = "Index" }
+                defaults: new { controller = "Post", action = "Index", username=(string)null}
+                );
+
+            routes.MapRoute(
+               name:"",
+               url:"{username}",
+               defaults: new { controller = "Post", action = "Index",page=1}               
+                );
+
+            routes.MapRoute(
+                name: "",
+                url:"{username}/Page/{page}",
+                defaults:new {controller="Post",action = "Index"}
                 );
 
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Post", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Post", action = "Index", id = UrlParameter.Optional}
             );
         }
     }
