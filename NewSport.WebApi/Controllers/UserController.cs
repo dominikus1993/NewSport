@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using NewSport.Domain.Api;
 using NewSport.Domain.Entities;
 using NewSport.WebApi.Models;
@@ -40,6 +41,7 @@ namespace NewSport.WebApi.Controllers
             {
                 if (_userRepository.LogIn(model.Username, model.Password))
                 {
+                    Session["user"] = model.Username;
                     return RedirectToAction("Index", "Post");
                 }
                 else
@@ -57,7 +59,9 @@ namespace NewSport.WebApi.Controllers
             return View();
         }
 
-        public ActionResult SignIn([Bind(Include = "Username,Email,Password")]User user )
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SignIn([Bind(Include = "Id,Username,Email,Password")]User user )
         {
             if (ModelState.IsValid)
             {
@@ -65,6 +69,13 @@ namespace NewSport.WebApi.Controllers
                 return RedirectToAction("Index", "Post");
             }
             return View(user);
+        }
+        [Authorize]
+        public ActionResult LogOff()
+        {
+            FormsAuthentication.SignOut();
+            Session["user"] = null;
+            return RedirectToAction("Index","Post");
         }
     }
 }

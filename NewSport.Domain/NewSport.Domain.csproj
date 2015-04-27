@@ -59,9 +59,9 @@
     <Compile Include="Entities\Comment.cs" />
     <Compile Include="Entities\Post.cs" />
     <Compile Include="Entities\User.cs" />
-    <Compile Include="Migrations\201504221819545_addAuthorIdField.cs" />
-    <Compile Include="Migrations\201504221819545_addAuthorIdField.Designer.cs">
-      <DependentUpon>201504221819545_addAuthorIdField.cs</DependentUpon>
+    <Compile Include="Migrations\201504252112077_new.cs" />
+    <Compile Include="Migrations\201504252112077_new.Designer.cs">
+      <DependentUpon>201504252112077_new.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -71,8 +71,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201504221819545_addAuthorIdField.resx">
-      <DependentUpon>201504221819545_addAuthorIdField.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201504252112077_new.resx">
+      <DependentUpon>201504252112077_new.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

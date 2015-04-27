@@ -11,11 +11,9 @@ namespace NewSport.WebApi.Models
     public class LoginViewModel
     {
         [Required]
-        [Index(IsUnique = true)]
         public String Username { get; set; }
 
         [Required]
-        [Index(IsUnique = true)]
         [DataType(DataType.Password)]
         public String Password { get; set; }
     }

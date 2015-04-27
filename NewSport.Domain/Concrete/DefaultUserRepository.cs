@@ -27,16 +27,17 @@ namespace NewSport.Domain.Concrete
 
         public void Save(User user)
         {
-            MD5 encrypter = MD5.Create();
+           
             if (user.Id == 0)
             {
-                user.Password = encrypter.ComputeHash(Encoding.Default.GetBytes(user.Password)).ToString();
+                user.Password = EncryptToMd5(user.Password);
                 _dbContext.Users.Add(user);
             }
             else
             {
                 EditUser(user);
             }
+            _dbContext.SaveChanges();
         }
 
         private void EditUser(User user)
@@ -51,7 +52,8 @@ namespace NewSport.Domain.Concrete
 
         public bool LogIn(string username, string password)
         {
-            bool loginResult = Users.Any(x => x.Username == username && x.Password == password);
+            string hashPassword = EncryptToMd5(password);
+            bool loginResult = Users.Any(x => x.Username == username && x.Password == hashPassword);
             if (loginResult)
             {
                 FormsAuthentication.SetAuthCookie(username, false);
@@ -69,9 +71,21 @@ namespace NewSport.Domain.Concrete
             return _dbContext.Users.FirstOrDefault(x => x.Username == username);
         }
 
-        public void Delete(int? id)
+        public void Delete(User user)
+        {         
+                _dbContext.Users.Remove(user);        
+        }
+
+        private string EncryptToMd5(string data)
         {
-            throw new NotImplementedException();
+            MD5 md5 = MD5.Create();
+            byte[] hashData = md5.ComputeHash(Encoding.Default.GetBytes(data));
+            StringBuilder builder = new StringBuilder();
+            for (int i = 0; i < hashData.Length; i++)
+            {
+                builder.Append(hashData[i].ToString());
+            }
+            return builder.ToString();
         }
     }
 }

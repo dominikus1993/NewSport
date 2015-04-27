@@ -15,6 +15,6 @@ namespace NewSport.Domain.Api
         bool LogIn(string username,string password);
         User FindById(int? id);
         User FindByUsername(string username);
-        void Delete(int? id);
+        void Delete(User user);
     }
 }

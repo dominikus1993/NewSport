@@ -17,11 +17,10 @@ namespace NewSport.Domain.Entities
         public Int32 Id { get; set; }
 
         [Required(ErrorMessage = "Nazwa użytkownia jest wymagana")]
-        [Index(IsUnique = true)]
         public String Username { get; set; }
 
         [Required(ErrorMessage = "Email jest wymagany")]
-        [Index(IsUnique = true)]
+        [DataType(DataType.EmailAddress)]
         public String Email { get; set; }
 
         [Required(ErrorMessage = "Hasło jest wymagane")]

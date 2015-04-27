@@ -51,7 +51,7 @@ namespace NewSport.WebApi.Controllers
             }
             Post post = _postRepository.FindById(id);
             if (post == null)
-            {
+            {               
                 return HttpNotFound();
             }
             return View(post);
@@ -70,7 +70,7 @@ namespace NewSport.WebApi.Controllers
         {
             if (ModelState.IsValid)
             {
-                post.AuthorId = 1;
+                post.AuthorId = _userRepository.FindByUsername(Session["user"].ToString()).Id;
                 _postRepository.Save(post);
                 return RedirectToAction("Index");
             }
