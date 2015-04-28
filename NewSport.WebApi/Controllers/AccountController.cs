@@ -12,11 +12,11 @@ using Ninject.Infrastructure.Language;
 
 namespace NewSport.WebApi.Controllers
 {
-    public class UserController : Controller
+    public class AccountController : Controller
     {
         private readonly IUserRepository _userRepository;
 
-        public UserController(IUserRepository userRepository)
+        public AccountController(IUserRepository userRepository)
         {
             _userRepository = userRepository;
         }
@@ -29,13 +29,13 @@ namespace NewSport.WebApi.Controllers
         }
 
         [HttpGet]
-        public ActionResult SignUp()
+        public ActionResult Login()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult SignUp(LoginViewModel model)
+        public ActionResult Login(LoginViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -54,14 +54,14 @@ namespace NewSport.WebApi.Controllers
         }
 
         [HttpGet]
-        public ActionResult SignIn()
+        public ActionResult Register()
         {
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SignIn([Bind(Include = "Id,Username,Email,Password")]User user )
+        public ActionResult Register([Bind(Include = "Id,Username,Email,Password")]User user )
         {
             if (ModelState.IsValid)
             {

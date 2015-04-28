@@ -15,7 +15,7 @@ namespace NewSport.Tests.Controllers
     [TestClass]
     public class UserControllerTest
     {
-        private UserController _userController;
+        private AccountController _userController;
         private Mock<IUserRepository> _mock;
         private List<User> _users;
 
@@ -29,7 +29,7 @@ namespace NewSport.Tests.Controllers
             _mock = new Mock<IUserRepository>();
             _mock.Setup(u => u.Users).Returns(_users.AsQueryable());
             _mock.Setup(u => u.LogIn("username", "password")).Returns(true);
-            _userController = new UserController(_mock.Object);
+            _userController = new AccountController(_mock.Object);
         }
 
         [TestMethod]
@@ -39,7 +39,7 @@ namespace NewSport.Tests.Controllers
             {
                 Username = "username",Password = "password"
             };
-            var result = _userController.SignUp(viewModel);
+            var result = _userController.Login(viewModel);
             Assert.IsInstanceOfType(result,typeof(RedirectToRouteResult));
         }
 
@@ -51,7 +51,7 @@ namespace NewSport.Tests.Controllers
                 Username = "uaa",
                 Password = "password"
             };
-            var result = _userController.SignUp(viewModel);
+            var result = _userController.Login(viewModel);
             Assert.IsNotInstanceOfType(result, typeof(RedirectToRouteResult));
         }
 
@@ -65,7 +65,7 @@ namespace NewSport.Tests.Controllers
                 Username = "email",
                 Password = "password"
             };
-            var result = _userController.SignIn(user);
+            var result = _userController.Register(user);
             _mock.Verify(repository => repository.Save(user));
             Assert.IsInstanceOfType(result,typeof(RedirectToRouteResult));
         }
@@ -73,13 +73,10 @@ namespace NewSport.Tests.Controllers
         [TestMethod]
         public void RegisterTestWithInValidData()
         {
-            User user = new User()
-            {
-                Id = 1,
-                Password = "password"
-            };
-            var result = _userController.SignIn(user);
-            _mock.Verify(repository => repository.Save(It.IsAny<User>()), Times.Never);
+            User user = new User();
+            _userController.ModelState.AddModelError("Username", "UserName is required");
+            var result = _userController.Register(user);
+           _mock.Verify(repository => repository.Save(It.IsAny<User>()), Times.Never);
             Assert.IsInstanceOfType(result, typeof(ViewResult));
         }
     }

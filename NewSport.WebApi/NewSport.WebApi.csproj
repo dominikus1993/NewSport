@@ -125,7 +125,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\PostController.cs" />
-    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -177,9 +177,9 @@
     <Content Include="Views\Post\Add.cshtml" />
     <Content Include="Views\Post\Edit.cshtml" />
     <None Include="Views\Post\Get.cshtml" />
-    <Content Include="Views\User\Index.cshtml" />
-    <Content Include="Views\User\SignUp.cshtml" />
-    <Content Include="Views\User\SignIn.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

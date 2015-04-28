@@ -59,6 +59,7 @@ namespace NewSport.WebApi.Controllers
 
         //GET: Post
         [HttpGet]
+        [Authorize]
         public ViewResult Add()
         {
             return View();

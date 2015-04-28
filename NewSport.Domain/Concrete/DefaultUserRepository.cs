@@ -81,9 +81,9 @@ namespace NewSport.Domain.Concrete
             MD5 md5 = MD5.Create();
             byte[] hashData = md5.ComputeHash(Encoding.Default.GetBytes(data));
             StringBuilder builder = new StringBuilder();
-            for (int i = 0; i < hashData.Length; i++)
+            foreach (byte hash in hashData)
             {
-                builder.Append(hashData[i].ToString());
+                builder.Append(hash.ToString());
             }
             return builder.ToString();
         }
