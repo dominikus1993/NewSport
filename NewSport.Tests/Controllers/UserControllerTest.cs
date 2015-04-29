@@ -13,7 +13,7 @@ using NewSport.WebApi.Models;
 namespace NewSport.Tests.Controllers
 {
     [TestClass]
-    public class AccountControllerTest
+    public class UserControllerTest
     {
         private AccountController _userController;
         private Mock<IUserRepository> _mock;
