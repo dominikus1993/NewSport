@@ -8,25 +8,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using NewSport.Domain.Entity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace NewSport.Domain.Entities
 {
-    public class User
+    public class User:IdentityUser
     {
-        [HiddenInput(DisplayValue = false)]
-        public Int32 Id { get; set; }
-
-        [Required(ErrorMessage = "Nazwa użytkownia jest wymagana")]
-        public String Username { get; set; }
-
-        [Required(ErrorMessage = "Email jest wymagany")]
-        [DataType(DataType.EmailAddress)]
-        public String Email { get; set; }
-
-        [Required(ErrorMessage = "Hasło jest wymagane")]
-        [DataType(DataType.Password)]
-        public String Password { get; set; }
-
         public virtual List<Post> Posts { get; set; }
     }
 }
