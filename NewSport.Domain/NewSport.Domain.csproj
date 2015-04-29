@@ -59,6 +59,7 @@
     <Compile Include="Entities\Comment.cs" />
     <Compile Include="Entities\Post.cs" />
     <Compile Include="Entities\User.cs" />
+    <Compile Include="Filters\DefaultAuthorize.cs" />
     <Compile Include="Migrations\201504252112077_new.cs" />
     <Compile Include="Migrations\201504252112077_new.Designer.cs">
       <DependentUpon>201504252112077_new.cs</DependentUpon>

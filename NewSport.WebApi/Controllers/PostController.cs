@@ -27,6 +27,7 @@ namespace NewSport.WebApi.Controllers
 
 
         // GET: Post
+        [AllowAnonymous]
         public ViewResult Index(string username,int page = 1)
         {
             PostViewModel viewModel = new PostViewModel()
@@ -42,7 +43,8 @@ namespace NewSport.WebApi.Controllers
             };
           
             return View(viewModel);
-        }       
+        }
+        [AllowAnonymous]
         public ActionResult Get(int? id)
         {
             if (id == null)

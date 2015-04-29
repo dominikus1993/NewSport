@@ -29,12 +29,14 @@ namespace NewSport.WebApi.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public ActionResult Login()
         {
             return View();
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public ActionResult Login(LoginViewModel model)
         {
             if (ModelState.IsValid)
@@ -54,12 +56,14 @@ namespace NewSport.WebApi.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public ActionResult Register()
         {
             return View();
         }
 
         [HttpPost]
+        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public ActionResult Register([Bind(Include = "Id,Username,Email,Password")]User user )
         {

@@ -1,5 +1,6 @@
 ﻿using System.Web;
 using System.Web.Mvc;
+using NewSport.Domain.Filters;
 
 namespace NewSport.WebApi
 {
@@ -8,6 +9,7 @@ namespace NewSport.WebApi
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
+            filters.Add(new DefaultAuthorize());
         }
     }
 }
