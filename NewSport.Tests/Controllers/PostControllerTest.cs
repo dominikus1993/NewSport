@@ -46,6 +46,7 @@ namespace NewSport.Tests.Controllers
 
             _userRepositoryMock = new Mock<IUserRepository>();
             _userRepositoryMock.Setup(repository => repository.Users).Returns(_users.AsQueryable());
+            _userRepositoryMock.Setup(repository => repository.FindByUsername("dom109")).Returns(_users[0]);
 
             _postController = new PostController(_postRepositoryMock.Object,_userRepositoryMock.Object);    
         }
@@ -60,6 +61,7 @@ namespace NewSport.Tests.Controllers
         [TestMethod]
         public void AddValidData()
         {
+            //_postController.Session["user"] = _userRepositoryMock.Object.FindByUsername(_users[0].Username);
             Post post = new Post(){Id = 5,Text = "as",Title = "daadsdsa"};
             ActionResult result = _postController.Add(post);
             _postRepositoryMock.Verify(x=>x.Save(post));

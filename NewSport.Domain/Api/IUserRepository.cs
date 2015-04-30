@@ -13,6 +13,7 @@ namespace NewSport.Domain.Api
         IQueryable<User> Users { get;}
         void Save(User user);
         bool LogIn(string username,string password);
+        void LogOff();
         User FindById(int? id);
         User FindByUsername(string username);
         void Delete(User user);

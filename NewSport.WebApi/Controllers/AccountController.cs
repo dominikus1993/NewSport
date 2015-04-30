@@ -43,7 +43,6 @@ namespace NewSport.WebApi.Controllers
             {
                 if (_userRepository.LogIn(model.Username, model.Password))
                 {
-                    Session["user"] = model.Username;
                     return RedirectToAction("Index", "Post");
                 }
                 else
@@ -77,8 +76,7 @@ namespace NewSport.WebApi.Controllers
         [Authorize]
         public ActionResult LogOff()
         {
-            FormsAuthentication.SignOut();
-            Session["user"] = null;
+            _userRepository.LogOff();
             return RedirectToAction("Index","Post");
         }
     }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Security;
 using System.Web.UI.WebControls;
 using NewSport.Domain.Api;
@@ -57,8 +58,15 @@ namespace NewSport.Domain.Concrete
             if (loginResult)
             {
                 FormsAuthentication.SetAuthCookie(username, false);
+                HttpContext.Current.Session["user"] = username;
             }
             return loginResult;
+        }
+
+        public void LogOff()
+        {
+            FormsAuthentication.SignOut();
+            HttpContext.Current.Session["user"] = null;
         }
 
         public User FindById(int? id)
