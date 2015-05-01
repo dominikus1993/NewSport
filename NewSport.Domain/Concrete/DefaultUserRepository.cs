@@ -15,9 +15,11 @@ namespace NewSport.Domain.Concrete
     public class DefaultUserRepository:IUserRepository
     {
         private readonly DefaultDbContext _dbContext;
+        private readonly IEncryptProvider _encryptProvider;
 
-        public DefaultUserRepository()
+        public DefaultUserRepository(IEncryptProvider provider)
         {
+            _encryptProvider = provider;
             this._dbContext = new DefaultDbContext();
         }
 
@@ -26,12 +28,20 @@ namespace NewSport.Domain.Concrete
             get { return _dbContext.Users; }
         }
 
+        public List<string> Roles
+        {
+            get
+            {
+                return Users.Select(usr => usr.Roles).ToList();
+            }
+        }
+
         public void Save(User user)
         {
            
             if (user.Id == 0)
             {
-                user.Password = EncryptToMd5(user.Password);
+                user.Password = _encryptProvider.Encrypt(user.Password);
                 _dbContext.Users.Add(user);
             }
             else
@@ -53,7 +63,7 @@ namespace NewSport.Domain.Concrete
 
         public bool LogIn(string username, string password)
         {
-            string hashPassword = EncryptToMd5(password);
+            string hashPassword = _encryptProvider.Encrypt(password);
             bool loginResult = Users.Any(x => x.Username == username && x.Password == hashPassword);
             if (loginResult)
             {
@@ -82,18 +92,6 @@ namespace NewSport.Domain.Concrete
         public void Delete(User user)
         {         
                 _dbContext.Users.Remove(user);        
-        }
-
-        private string EncryptToMd5(string data)
-        {
-            MD5 md5 = MD5.Create();
-            byte[] hashData = md5.ComputeHash(Encoding.Default.GetBytes(data));
-            StringBuilder builder = new StringBuilder();
-            foreach (byte hash in hashData)
-            {
-                builder.Append(hash.ToString());
-            }
-            return builder.ToString();
         }
     }
 }

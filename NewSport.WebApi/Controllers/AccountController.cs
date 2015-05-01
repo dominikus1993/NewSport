@@ -64,10 +64,11 @@ namespace NewSport.WebApi.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult Register([Bind(Include = "Id,Username,Email,Password")]User user )
+        public ActionResult Register([Bind(Include = "Id,Username,Email,Password,Roles")]User user )
         {
             if (ModelState.IsValid)
             {
+                user.Roles = "USER";
                 _userRepository.Save(user);
                 return RedirectToAction("Index", "Post");
             }

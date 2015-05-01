@@ -73,7 +73,10 @@ namespace NewSport.WebApi.Controllers
         {
             if (ModelState.IsValid)
             {
-                post.AuthorId = _userRepository.FindByUsername(Session["user"].ToString()).Id;
+                if (Session["user"] != null)
+                {
+                   post.AuthorId = _userRepository.FindByUsername(Session["user"].ToString()).Id; 
+                }             
                 _postRepository.Save(post);
                 return RedirectToAction("Index");
             }
@@ -81,6 +84,7 @@ namespace NewSport.WebApi.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public ViewResult Edit(int? id)
         {
             Post post = _postRepository.FindById(id);
@@ -100,6 +104,7 @@ namespace NewSport.WebApi.Controllers
 
         }
 
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)

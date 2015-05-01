@@ -38,8 +38,10 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Web.Mvc, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.2\lib\net45\System.Web.Mvc.dll</HintPath>
@@ -51,9 +53,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api\IEncryptProvider.cs" />
     <Compile Include="Api\IPostRepository.cs" />
     <Compile Include="Api\IUserRepository.cs" />
     <Compile Include="Concrete\DefaultDbContext.cs" />
+    <Compile Include="Concrete\DefaultEncryptProvider.cs" />
     <Compile Include="Concrete\DefaultPostRepository.cs" />
     <Compile Include="Concrete\DefaultUserRepository.cs" />
     <Compile Include="Entities\Comment.cs" />
@@ -63,6 +67,10 @@
     <Compile Include="Migrations\201504252112077_new.cs" />
     <Compile Include="Migrations\201504252112077_new.Designer.cs">
       <DependentUpon>201504252112077_new.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201505011752185_addRoles.cs" />
+    <Compile Include="Migrations\201505011752185_addRoles.Designer.cs">
+      <DependentUpon>201505011752185_addRoles.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -74,6 +82,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201504252112077_new.resx">
       <DependentUpon>201504252112077_new.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505011752185_addRoles.resx">
+      <DependentUpon>201505011752185_addRoles.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

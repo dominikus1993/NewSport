@@ -33,6 +33,7 @@ namespace NewSport.WebApi.Infrastructure
         {
             _defaultKernel.Bind<IUserRepository>().To<DefaultUserRepository>();
             _defaultKernel.Bind<IPostRepository>().To<DefaultPostRepository>();
+            _defaultKernel.Bind<IEncryptProvider>().To<DefaultEncryptProvider>();
         }
     }
 }

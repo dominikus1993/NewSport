@@ -11,11 +11,12 @@ namespace NewSport.Domain.Api
     public interface IUserRepository
     {
         IQueryable<User> Users { get;}
+        List<String> Roles { get;}
         void Save(User user);
         bool LogIn(string username,string password);
         void LogOff();
         User FindById(int? id);
-        User FindByUsername(string username);
+        User FindByUsername(string username); 
         void Delete(User user);
     }
 }

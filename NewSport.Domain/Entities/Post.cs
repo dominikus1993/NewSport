@@ -16,7 +16,7 @@ namespace NewSport.Domain.Entity
         {
             Date = DateTime.Now;
         }
-        
+
         [HiddenInput(DisplayValue = false)]
         public Int32 Id { get; set; }
        
@@ -34,6 +34,8 @@ namespace NewSport.Domain.Entity
 
         [ForeignKey("AuthorId")]
         public User Author { get; set; }
+
+        public virtual List<Comment> Comments { get; set; }
 
         public override string ToString()
         {

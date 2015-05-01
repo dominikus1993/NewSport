@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using System.Web.Security;
 using NewSport.Domain.Entity;
 
 namespace NewSport.Domain.Entities
@@ -27,6 +28,10 @@ namespace NewSport.Domain.Entities
         [DataType(DataType.Password)]
         public String Password { get; set; }
 
+        public String Roles { get; set; }
+
         public virtual List<Post> Posts { get; set; }
+
+        public virtual List<Comment> Comments { get; set; }
     }
 }

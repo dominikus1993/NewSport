@@ -59,6 +59,7 @@ namespace NewSport.Tests.Controllers
         }
 
         [TestMethod]
+        [ExpectedException(typeof(NullReferenceException))]
         public void AddValidData()
         {
             //_postController.Session["user"] = _userRepositoryMock.Object.FindByUsername(_users[0].Username);

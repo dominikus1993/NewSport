@@ -66,7 +66,13 @@ namespace NewSport.Tests.Routes
         [TestMethod]
         public void TestRouteMatch()
         {
-           
+           TestRouteMatch("~/","Post","Index");
+           TestRouteMatch("~/Post/Get/1","Post","Get",new {id="1"});
+           TestRouteMatch("~/Post/Delete/1","Post","Delete",new{id="1"});
+           TestRouteMatch("~/Post/Add", "Post", "Add");
+           TestRouteMatch("~/Post/Edit/1", "Post", "Edit", new { id = "1" });
+           TestRouteMatch("~/Account/Login", "Account", "Login");
+           TestRouteMatch("~/Account/Register", "Account", "Register");
         }
     }
 }

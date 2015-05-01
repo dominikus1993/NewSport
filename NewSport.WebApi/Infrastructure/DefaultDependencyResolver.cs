@@ -22,7 +22,7 @@ namespace NewSport.WebApi.Infrastructure
 
         private void AddBindings()
         {
-        
+            _kernel.Bind<IEncryptProvider>().To<DefaultEncryptProvider>();
         }
 
         public object GetService(Type serviceType)
