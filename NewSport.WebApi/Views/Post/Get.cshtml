@@ -1,11 +1,93 @@
-﻿@using NewSport.Domain.Entity
+﻿@using NewSport.Domain.Entities
+@using NewSport.Domain.Entity
 @model NewSport.Domain.Entity.Post
 
 @{
     ViewBag.Title = "Get Post";
+    AjaxOptions ajaxOptions = new AjaxOptions()
+    {
+        UpdateTargetId = "comments",
+        Url = Url.Action("Add","Comment"),
+        LoadingElementId = "loadingComments",
+        LoadingElementDuration = 1000,
+        Confirm = "Czy chcesz dodac komentarz",
+        OnSuccess = "processData"
+    };
 }
+<script type="text/javascript">
+    function OnFailure(data) {
+        alert(data);
+        alert("Dupa");
+    }
+    function processData(data) {
+        alert("Dupa2");
+        var target = $("#comments");
+        target.empty();
+        for (var i = 0; i < data.length; i++) {
+            target.append("<blackquote>" + data.Message + "<small>Dodano przez:" + data.Author.Username + " " + data.CommentsDate + "</small>" + "</blockquote>");
+          
+        }
+    }
+</script>
 <h2>Get Post</h2>
-<div>@Session["user"]</div>
-<div>@Model.Title</div>
-<div>@Model.Text</div>
-<div>@Model.AuthorId</div>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <!-- Dla każdego wpisu wykonujemy pętlę -->
+
+        <div class="span1">
+
+        </div>
+        <section id="popovers">
+            <div class="page-header">
+                <h1>@Html.DisplayFor(m => Model.Title)</h1>
+
+                <div class="single-head-meta">
+                    <i>Dodano:</i><time-datatime class="updated">@Html.DisplayFor(m => Model.Date)</time-datatime>
+                    <span class="byline author vcard">
+                        <i>Przez</i> <span class="fn">@Html.DisplayFor(m => Model.Author.Username)</span>
+
+
+
+
+                    </span>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span12 columns">
+                    <div class="twipsies well">
+                        <div style="position: relative">
+                            <div class="row-fluid">
+                                <div class="span2">
+
+                                    @*<img src="<?php echo $postimg; ?>" alt="">*@
+
+                                </div>
+                                <div class="span9">
+                                    <p>
+                                        @Html.DisplayFor(m => Model.Text)
+                                    </p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div id="loadingComments" class="loadComments" style="display: none">
+            <p>Ładowanie danych...</p>
+        </div>
+        <div id="comments">
+            @Html.Action("Get", "Comment", new {postId = Model.Id})
+        </div>
+        <div>
+            @using (Ajax.BeginForm(ajaxOptions))
+            {
+                <div>
+                    @Html.Editor("Message")
+                    <button type="submit">Wyślij</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>

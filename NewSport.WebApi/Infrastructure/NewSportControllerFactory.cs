@@ -31,6 +31,7 @@ namespace NewSport.WebApi.Infrastructure
 
         private void AdBindings()
         {
+            _defaultKernel.Bind<ICommentRepository>().To<DefaultCommentRepository>();
             _defaultKernel.Bind<IUserRepository>().To<DefaultUserRepository>();
             _defaultKernel.Bind<IPostRepository>().To<DefaultPostRepository>();
             _defaultKernel.Bind<IEncryptProvider>().To<DefaultEncryptProvider>();

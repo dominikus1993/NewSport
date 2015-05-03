@@ -20,7 +20,7 @@ namespace NewSport.Domain.Concrete
 
         public IQueryable<Post> Posts
         {
-            get { return _dbContext.Posts.Include(u=>u.Author); }
+            get { return _dbContext.Posts; }
         }
 
         public void Save(Post post)
@@ -44,7 +44,7 @@ namespace NewSport.Domain.Concrete
 
         public Post FindById(int? id)
         {
-            return _dbContext.Posts.FirstOrDefault(x=>x.Id == id);
+            return _dbContext.Posts.Include(x=>x.Author).FirstOrDefault(x=>x.Id == id);
         }
 
         public IQueryable<Post> FindByUser(string username)

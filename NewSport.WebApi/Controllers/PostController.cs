@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -32,7 +33,7 @@ namespace NewSport.WebApi.Controllers
         {
             PostViewModel viewModel = new PostViewModel()
             {
-                Posts = _postRepository.Posts.Where(x=> x.Author.Username == username || username == null).OrderBy(x=>x.Id).Skip((page - 1) * PageSize).Take(PageSize),
+                Posts = _postRepository.Posts.Include(u=>u.Author).Where(x=> x.Author.Username == username || username == null).OrderBy(x=>x.Id).Skip((page - 1) * PageSize).Take(PageSize),
                 PagingInfo = new PagingInfo()
                 {
                     CurrentPage = page,

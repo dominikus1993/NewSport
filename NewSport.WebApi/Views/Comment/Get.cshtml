@@ -1,0 +1,18 @@
+﻿@model System.Linq.IOrderedQueryable<NewSport.Domain.Entities.Comment>
+
+@{
+    ViewBag.Title = "title";
+    Layout = null;
+}
+@foreach (var model in Model)
+{
+    <blockquote>
+
+        @Html.DisplayFor(m => model.Message)
+
+        <small>Dodano przez: @Html.DisplayFor(m => model.Author.Username) @Html.DisplayFor(m => model.CommentsDate)</small>
+
+
+    </blockquote>
+
+}

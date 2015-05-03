@@ -42,6 +42,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Mvc, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.2\lib\net45\System.Web.Mvc.dll</HintPath>
@@ -53,9 +54,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api\ICommentRepository.cs" />
     <Compile Include="Api\IEncryptProvider.cs" />
     <Compile Include="Api\IPostRepository.cs" />
     <Compile Include="Api\IUserRepository.cs" />
+    <Compile Include="Concrete\DefaultCommentRepository.cs" />
     <Compile Include="Concrete\DefaultDbContext.cs" />
     <Compile Include="Concrete\DefaultEncryptProvider.cs" />
     <Compile Include="Concrete\DefaultPostRepository.cs" />
@@ -72,6 +75,10 @@
     <Compile Include="Migrations\201505011752185_addRoles.Designer.cs">
       <DependentUpon>201505011752185_addRoles.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201505011844250_addComments.cs" />
+    <Compile Include="Migrations\201505011844250_addComments.Designer.cs">
+      <DependentUpon>201505011844250_addComments.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -85,6 +92,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201505011752185_addRoles.resx">
       <DependentUpon>201505011752185_addRoles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505011844250_addComments.resx">
+      <DependentUpon>201505011844250_addComments.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

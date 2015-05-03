@@ -11,6 +11,11 @@ namespace NewSport.Domain.Entities
 {
     public class Comment
     {
+        public Comment()
+        {
+            CommentsDate = DateTime.Now;
+        }
+
         [HiddenInput(DisplayValue = false)]
         public Int32 Id { get; set; }
 
