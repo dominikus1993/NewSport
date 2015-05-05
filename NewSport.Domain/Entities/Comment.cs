@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -19,6 +20,7 @@ namespace NewSport.Domain.Entities
         [HiddenInput(DisplayValue = false)]
         public Int32 Id { get; set; }
 
+        [DataType(DataType.MultilineText)]
         public String Message { get; set; }
 
         public DateTime CommentsDate { get; set; }

@@ -15,28 +15,31 @@ namespace NewSport.WebApi.Controllers
     public class CommentController : Controller
     {
         private readonly ICommentRepository _commentRepository;
+        private readonly IUserRepository _userRepository;
 
-        public CommentController(ICommentRepository commentRepository)
+        public CommentController(ICommentRepository commentRepository,IUserRepository userRepository)
         {
             _commentRepository = commentRepository;
+            _userRepository = userRepository;
         }
         // GET: Comment
         [AllowAnonymous]
         public PartialViewResult Get(int? postId)
         {
-            var data = _commentRepository.Comments.Where(x => x.PostId == postId || postId == null).OrderBy(x => x.Id);
+            var data = _commentRepository.Comments.Where(x => x.PostId == postId || postId == null).OrderByDescending(x => x.CommentsDate);
             return PartialView(data);
         }
 
-        public ActionResult Add(Comment comment)
+        [Authorize]
+        public ActionResult Add(Comment comment,int? postId)
         {
-            comment.PostId = 1022;
-            comment.AuthorId = 8;
+            comment.PostId = postId;
+            comment.AuthorId = _userRepository.FindByUsername(Session["user"].ToString()).Id;
             if (Request.IsAjaxRequest())
             {
                  _commentRepository.Save(comment);
                 
-                var data = _commentRepository.Comments.Select(p => new
+                var data = _commentRepository.Comments.Where(x=>x.PostId == postId).Select(p => new
                 {
                     Id = p.Id,
                     Message = p.Message,

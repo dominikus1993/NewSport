@@ -90,6 +90,7 @@
   <ItemGroup>
     <Compile Include="Controllers\PostControllerTest.cs" />
     <Compile Include="Controllers\UserControllerTest.cs" />
+    <Compile Include="Helpers\HelpersTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Routes\RouteTests.cs" />
   </ItemGroup>

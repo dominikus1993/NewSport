@@ -30,8 +30,8 @@ namespace NewSport.Domain.Entities
 
         public String Roles { get; set; }
 
-        public virtual List<Post> Posts { get; set; }
+        //public virtual List<Post> Posts { get; set; }
 
-        public virtual List<Comment> Comments { get; set; }
+       // public virtual List<Comment> Comments { get; set; }
     }
 }

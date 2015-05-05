@@ -4,15 +4,30 @@
     ViewBag.Title = "title";
     Layout = null;
 }
+<div class="page-header">
+    <h1><small class="pull-right">@Model.Count() Comments</small> Comments </h1>
+</div>
+
 @foreach (var model in Model)
 {
-    <blockquote>
+   
+    <div class="comments-list">
+        <div class="media">
+            <p class="pull-right">
+                <small>@Html.HowMuchTimeHasPassedSinceSbAddedComment(model.CommentsDate)</small>
+            </p>
+            <a class="media-left" href="#">
+                <img src="http://lorempixel.com/40/40/people/1/">
+            </a>
+            <div class="media-body">
 
-        @Html.DisplayFor(m => model.Message)
+                <h4 class="media-heading user_name">@Html.DisplayFor(m => model.Author.Username)</h4>
+                @Html.DisplayFor(m => model.Message)
 
-        <small>Dodano przez: @Html.DisplayFor(m => model.Author.Username) @Html.DisplayFor(m => model.CommentsDate)</small>
-
-
-    </blockquote>
-
+                <p>
+                    <small><a href="">Like</a> - <a href="">Share</a></small>
+                </p>
+            </div>
+        </div>
+    </div>
 }
