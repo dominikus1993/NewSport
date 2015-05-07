@@ -65,6 +65,7 @@
     <Compile Include="Concrete\DefaultUserRepository.cs" />
     <Compile Include="Entities\Comment.cs" />
     <Compile Include="Entities\Post.cs" />
+    <Compile Include="Entities\Role.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Filters\DefaultAuthorize.cs" />
     <Compile Include="Migrations\201504252112077_new.cs" />
@@ -78,6 +79,10 @@
     <Compile Include="Migrations\201505011844250_addComments.cs" />
     <Compile Include="Migrations\201505011844250_addComments.Designer.cs">
       <DependentUpon>201505011844250_addComments.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201505070905344_addUserRolesAndImageData.cs" />
+    <Compile Include="Migrations\201505070905344_addUserRolesAndImageData.Designer.cs">
+      <DependentUpon>201505070905344_addUserRolesAndImageData.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -95,6 +100,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201505011844250_addComments.resx">
       <DependentUpon>201505011844250_addComments.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505070905344_addUserRolesAndImageData.resx">
+      <DependentUpon>201505070905344_addUserRolesAndImageData.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

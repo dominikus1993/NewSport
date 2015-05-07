@@ -35,6 +35,11 @@ namespace NewSport.Domain.Entity
         [ForeignKey("AuthorId")]
         public User Author { get; set; }
 
+        public byte[] ImageData { get; set; }
+
+        [HiddenInput(DisplayValue = false)]
+        public String ImageMimeType { get; set; }
+
         public virtual List<Comment> Comments { get; set; }
 
         public override string ToString()

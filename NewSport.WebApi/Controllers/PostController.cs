@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
+using System.Web.Http.Filters;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
 using NewSport.Domain.Api;
@@ -17,32 +18,36 @@ namespace NewSport.WebApi.Controllers
     {
         private readonly IPostRepository _postRepository;
         private readonly IUserRepository _userRepository;
+        private readonly ICommentRepository _commentRepository;
         public int PageSize { get; private set; }
 
-        public PostController(IPostRepository postRepository, IUserRepository userRepository)
+        public PostController(IPostRepository postRepository, IUserRepository userRepository,ICommentRepository commentRepository)
         {
             _postRepository = postRepository;
             _userRepository = userRepository;
+            _commentRepository = commentRepository;
             PageSize = 10;
         }
 
 
         // GET: Post
         [AllowAnonymous]
-        public ViewResult Index(string username,int page = 1)
+        public ViewResult Index(string username, int page = 1)
         {
+            
             PostViewModel viewModel = new PostViewModel()
             {
-                Posts = _postRepository.Posts.Include(u=>u.Author).Where(x=> x.Author.Username == username || username == null).OrderBy(x=>x.Id).Skip((page - 1) * PageSize).Take(PageSize),
+                Posts = _postRepository.Posts.Include(u => u.Author).Where(x => x.Author.Username == username || username == null).OrderByDescending(x => x.Date).Skip((page - 1) * PageSize).Take(PageSize),
+
                 PagingInfo = new PagingInfo()
                 {
                     CurrentPage = page,
                     PostsPerPage = PageSize,
-                    TotalPosts  = username == null?_postRepository.Posts.Count():_postRepository.Posts.Count(x => x.Author.Username == username)
+                    TotalPosts = username == null ? _postRepository.Posts.Count() : _postRepository.Posts.Count(x => x.Author.Username == username)
                 },
                 CurrentUser = username
             };
-          
+
             return View(viewModel);
         }
         [AllowAnonymous]
@@ -54,7 +59,7 @@ namespace NewSport.WebApi.Controllers
             }
             Post post = _postRepository.FindById(id);
             if (post == null)
-            {               
+            {
                 return HttpNotFound();
             }
             return View(post);
@@ -70,19 +75,25 @@ namespace NewSport.WebApi.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Add([Bind(Include = "Id,Title,Text,Date")] Post post)
+        public ActionResult Add([Bind(Include = "Id,Title,Text,Date")] Post post, HttpPostedFileBase image)
         {
             if (ModelState.IsValid)
             {
-                if (Session["user"] != null)
+                SaveImageDataIfNotNull(post, image);
+                if (_userRepository.IsLogged())
                 {
-                   post.AuthorId = _userRepository.FindByUsername(Session["user"].ToString()).Id; 
-                }             
+                    post.AuthorId = _userRepository.FindByUsername(Session["user"].ToString()).Id;
+                }
+                else
+                {
+                    return new HttpUnauthorizedResult();
+                }
                 _postRepository.Save(post);
                 return RedirectToAction("Index");
             }
             return View(post);
         }
+
 
         [HttpGet]
         [Authorize]
@@ -94,17 +105,28 @@ namespace NewSport.WebApi.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Title,Text,Date")]Post post)
+        public ActionResult Edit([Bind(Include = "Id,Title,Text,Date")]Post post,HttpPostedFileBase image)
         {
             if (ModelState.IsValid)
             {
+                SaveImageDataIfNotNull(post,image);
                 _postRepository.Save(post);
                 return RedirectToAction("Index");
             }
             return View(post);
 
         }
-
+        
+        private void SaveImageDataIfNotNull(Post post, HttpPostedFileBase image)
+        {
+            if (image != null)
+            {
+                post.ImageMimeType = image.ContentType;
+                post.ImageData = new byte[image.ContentLength];
+                image.InputStream.Read(post.ImageData, 0, image.ContentLength);
+            }
+        }
+        
         [Authorize]
         public ActionResult Delete(int? id)
         {
@@ -116,9 +138,23 @@ namespace NewSport.WebApi.Controllers
             if (post != null)
             {
                 _postRepository.Delete(post);
-                return RedirectToAction("Index");
+                _commentRepository.DeleteByPost(id);
+                return Json(post, JsonRequestBehavior.AllowGet);
             }
             return HttpNotFound();
+        }
+        [AllowAnonymous]
+        public FileContentResult GetImage(int? postId)
+        {
+            Post post = _postRepository.Posts.FirstOrDefault(p => p.Id == postId);
+            if (post != null)
+            {
+                return File(post.ImageData, post.ImageMimeType);
+            }
+            else
+            {
+                return null;
+            }
         }
 
     }

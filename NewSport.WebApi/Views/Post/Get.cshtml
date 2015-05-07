@@ -67,9 +67,8 @@
 <h2>Get Post</h2>
 <div class="container-fluid">
     <div class="row-fluid">
-        <!-- Dla każdego wpisu wykonujemy pętlę -->
 
-        <div class="span1">
+        <div class="col-md-1">
 
         </div>
         <section id="popovers">
@@ -90,7 +89,10 @@
                             <div class="row-fluid">
                                 <div class="span2">
 
-                                    @*<img src="<?php echo $postimg; ?>" alt="">*@
+                                    @if (Model.ImageData != null)
+                                    {
+                                        <img src="@Url.Action("GetImage","Post",new{postId = Model.Id})" alt="Nope">
+                                    }
 
                                 </div>
                                 <div class="span9">

@@ -20,6 +20,7 @@ namespace NewSport.Tests.Controllers
         private PostController _postController;
         private Mock<IPostRepository> _postRepositoryMock;
         private Mock<IUserRepository> _userRepositoryMock;
+        private Mock<ICommentRepository> _commentRepositoryMock;
         private List<Post> _posts;
         private List<User> _users;
         
@@ -48,7 +49,10 @@ namespace NewSport.Tests.Controllers
             _userRepositoryMock.Setup(repository => repository.Users).Returns(_users.AsQueryable());
             _userRepositoryMock.Setup(repository => repository.FindByUsername("dom109")).Returns(_users[0]);
 
-            _postController = new PostController(_postRepositoryMock.Object,_userRepositoryMock.Object);    
+            _commentRepositoryMock = new Mock<ICommentRepository>();
+            _commentRepositoryMock.Setup(repository => repository.Comments)
+                .Returns(new List<Comment>() {new Comment()}.AsQueryable());
+            _postController = new PostController(_postRepositoryMock.Object,_userRepositoryMock.Object,_commentRepositoryMock.Object);    
         }
 
         [TestMethod]
@@ -64,7 +68,7 @@ namespace NewSport.Tests.Controllers
         {
             //_postController.Session["user"] = _userRepositoryMock.Object.FindByUsername(_users[0].Username);
             Post post = new Post(){Id = 5,Text = "as",Title = "daadsdsa"};
-            ActionResult result = _postController.Add(post);
+            ActionResult result = _postController.Add(post,null);
             _postRepositoryMock.Verify(x=>x.Save(post));
             Assert.IsNotInstanceOfType(result, typeof(ViewResult));
         }
@@ -115,7 +119,7 @@ namespace NewSport.Tests.Controllers
         {   
             Post post = new Post() {Title = "daadsdsa" };
             _postController.ModelState.AddModelError("Text", "Text is required");
-            ActionResult result = _postController.Add(post);
+            ActionResult result = _postController.Add(post,null);
             _postRepositoryMock.Verify(m=>m.Save(It.IsAny<Post>()),Times.Never);
             Assert.IsInstanceOfType(result, typeof(ViewResult));
         }

@@ -28,7 +28,15 @@ namespace NewSport.Domain.Entities
         [DataType(DataType.Password)]
         public String Password { get; set; }
 
-        public String Roles { get; set; }
+        public int? RoleId { get; set; }
+
+        [ForeignKey("RoleId")]
+        public Role Role { get; set; }
+
+        public byte Avatar { get; set; }
+
+        [HiddenInput(DisplayValue = false)]
+        public String AvatarMimeType { get; set; }
 
         //public virtual List<Post> Posts { get; set; }
 

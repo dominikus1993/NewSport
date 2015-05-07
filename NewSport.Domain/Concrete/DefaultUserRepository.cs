@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,10 +32,7 @@ namespace NewSport.Domain.Concrete
 
         public List<string> Roles
         {
-            get
-            {
-                return Users.Select(usr => usr.Roles).ToList();
-            }
+            get { return new List<string>(_dbContext.Roles.Select(x=>x.Name)); }
         }
 
         public void Save(User user)
@@ -77,6 +76,11 @@ namespace NewSport.Domain.Concrete
         {
             FormsAuthentication.SignOut();
             HttpContext.Current.Session["user"] = null;
+        }
+
+        public bool IsLogged()
+        {
+            return HttpContext.Current.Session["user"] != null;
         }
 
         public User FindById(int? id)

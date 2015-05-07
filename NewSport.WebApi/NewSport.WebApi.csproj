@@ -142,10 +142,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="HtmlHelpers\AuthorizationHelper.cs" />
     <Compile Include="HtmlHelpers\PagingHelpers.cs" />
     <Compile Include="HtmlHelpers\TimeHelpers.cs" />
     <Compile Include="Infrastructure\DefaultDependencyResolver.cs" />
     <Compile Include="Infrastructure\NewSportControllerFactory.cs" />
+    <Compile Include="Models\LoggedUserViewModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\PagingInfo.cs" />
     <Compile Include="Models\PostViewModel.cs" />
@@ -194,6 +196,7 @@
     <Content Include="Views\Post\Add.cshtml" />
     <Content Include="Views\Post\Edit.cshtml" />
     <None Include="Views\Comment\Get.cshtml" />
+    <None Include="Views\Comment\GetCommentsAmountByPost.cshtml" />
     <None Include="Views\Post\Get.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />

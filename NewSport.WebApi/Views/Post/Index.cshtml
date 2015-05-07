@@ -4,43 +4,76 @@
     ViewBag.Title = "Index";
 }
 
+<script type="text/javascript">
+    var objectToDelete;
+
+    function deletePost() {
+        objectToDelete = $(this).closest("#post");
+        objectToDelete.remove();
+    }
+</script>
+<div id="deleteMessage" class="alert alert-success" role="alert" style="display: none">Pomyślnie usunieto post</div>
 <h2>@ViewBag.Title</h2>
-<table class="table">
-    <thead>
-    <tr>
-        <th>Id</th>
-        <th>Tytul</th>
-        <th>Tekst</th>
-        <th>Data</th>
-        <th>Autor</th>
-        <th>Akcje</th>
-    </tr>
-    </thead>
-    <tbody>
+<p></p>
+<div class="row">
+
     @foreach (var post in Model.Posts)
     {
-        <tr>
-            <td>@Html.ActionLink(@post.Id.ToString(), "Get", new {post.Id})</td>
-            <td>@Html.DisplayFor(m => post.Title)</td>
-            <td>@Html.DisplayFor(m => post.Text)</td>
-            <td>@Html.DisplayFor(m => post.Date)</td>
-            <td>@Html.ActionLink(post.Author.Username, "Index", new { post.Author.Username, page = 1 })</td>
-            <td>
-                <div class="btn-group">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                        Action <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">@Html.ActionLink("Delete", "Delete", new {post.Id})</a></li>
-                        <li><a href="#">@Html.ActionLink("Edit", "Edit", new {post.Id})</a></li>
-                    </ul>
+        <div class="col-md-12" id="post">
+            <div class="row">
+                <div class="col-md-8">
+                    <h4><strong>@Html.ActionLink(@post.Title, "Get", new { post.Id })</strong></h4>
                 </div>
-            </td>
-        </tr>
-    }
-    </tbody>
-</table>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    @if (post.ImageData != null)
+                    {
+                        <a href="@Url.Action("Get", "Post", new {post.Id})" class="thumbnail">
+                            <img src="@Url.Action("GetImage","Post",new{postId = post.Id})" alt="Nope">
+                        </a>
+                    }
 
+                </div>
+                <div class="col-md-8">
+                    <p>
+                        @Html.DisplayFor(m => post.Text)
+                    </p>
+                    <p>
+                        <div>
+                            @Html.ActionLink("Przeczytaj", "Get", new { post.Id }, new { @class = "btn btn-default" })
+                            @if (@Html.IsLogged())
+                            {
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                        Action <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="#">@Ajax.ActionLink("Delete", "Index", new AjaxOptions() { Url = Url.Action("Delete", "Post", new { post.Id }), Confirm = "Czy napewno chcesz usunac ten post?", LoadingElementId = "deleteMessage", LoadingElementDuration = 2000, OnSuccess = "deletePost" })</a></li>
+                                        <li><a href="#">@Html.ActionLink("Edit", "Edit", new { post.Id })</a></li>
+                                    </ul>
+                                </div>
+                            }
+                        </div>
+                    </p>
+
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <p></p>
+                    <p>
+                        <i class="glyphicon glyphicon-user"></i> by @Html.ActionLink(post.Author.Username, "Index", new { post.Author.Username, page = 1 })
+                        | <i class="glyphicon glyphicon-calendar"></i> @Html.HowMuchTimeHasPassedSinceSbAddedComment(post.Date)
+                        | <i class="glyphicon glyphicon-comment"></i> <a href="#">@Html.Action("GetCommentsAmountByPost", "Comment", new { postId = post.Id }) Comments</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<hr>
 <div class="pager">
-    @Html.PostLinks(Model.PagingInfo, x => Url.Action("Index", new { page = x, username = Model.CurrentUser}))
+    @Html.PostLinks(Model.PagingInfo, x => Url.Action("Index", new { page = x, username = Model.CurrentUser }))
 </div>

@@ -68,7 +68,7 @@ namespace NewSport.WebApi.Controllers
         {
             if (ModelState.IsValid)
             {
-                user.Roles = "USER";
+                user.Role = new Role(){Name = "Administrator"};
                 _userRepository.Save(user);
                 return RedirectToAction("Index", "Post");
             }

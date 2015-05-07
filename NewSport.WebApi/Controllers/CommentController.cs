@@ -35,10 +35,9 @@ namespace NewSport.WebApi.Controllers
         {
             comment.PostId = postId;
             comment.AuthorId = _userRepository.FindByUsername(Session["user"].ToString()).Id;
+            _commentRepository.Save(comment);
             if (Request.IsAjaxRequest())
-            {
-                 _commentRepository.Save(comment);
-                
+            {    
                 var data = _commentRepository.Comments.Where(x=>x.PostId == postId).Select(p => new
                 {
                     Id = p.Id,
@@ -49,8 +48,15 @@ namespace NewSport.WebApi.Controllers
                 }).ToList();
                 return Json(data,JsonRequestBehavior.AllowGet);
             }
-             return PartialView("Get",_commentRepository.Comments as IOrderedQueryable<Comment>);    
+             return PartialView("Get",_commentRepository.Comments.Where(x=>x.PostId  == postId) as IOrderedQueryable<Comment>);    
             
+        }
+
+        [AllowAnonymous]
+        public PartialViewResult GetCommentsAmountByPost(int? postId)
+        {
+
+            return PartialView(_commentRepository.CountCommentsByPostId(x => x.PostId == postId));
         }
 
     }

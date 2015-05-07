@@ -12,5 +12,6 @@ namespace NewSport.WebApi.Models
         public IEnumerable<Post> Posts { get; set; }
         public PagingInfo PagingInfo { get; set; }
         public String CurrentUser { get; set; }
+        public Dictionary<int,int> CommentsCountByPostId { get; set; }
     }
 }
