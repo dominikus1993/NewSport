@@ -11,7 +11,7 @@ namespace NewSport.Domain.Api
     public interface IUserRepository
     {
         IQueryable<User> Users { get;}
-        List<String> Roles { get;}
+        IQueryable<Role> Roles { get; }
         void Save(User user);
         bool LogIn(string username,string password);
         void LogOff();

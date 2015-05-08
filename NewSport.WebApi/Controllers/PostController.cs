@@ -67,7 +67,7 @@ namespace NewSport.WebApi.Controllers
 
         //GET: Post
         [HttpGet]
-        [Authorize]
+        [Authorize(Roles = "ADMINISTRATOR")]
         public ViewResult Add()
         {
             return View();
@@ -137,8 +137,8 @@ namespace NewSport.WebApi.Controllers
             Post post = _postRepository.FindById(id);
             if (post != null)
             {
-                _postRepository.Delete(post);
                 _commentRepository.DeleteByPost(id);
+                _postRepository.Delete(post);
                 return Json(post, JsonRequestBehavior.AllowGet);
             }
             return HttpNotFound();

@@ -60,8 +60,12 @@ namespace NewSport.Domain.Concrete
             {
                 editingPost.Text = post.Text;
                 editingPost.Title = post.Title;
-                editingPost.ImageData = post.ImageData;
-                editingPost.ImageMimeType = post.ImageMimeType;
+                if (post.ImageData != null && post.ImageMimeType != null)
+                {
+                    editingPost.ImageData = post.ImageData;
+                    editingPost.ImageMimeType = post.ImageMimeType;
+                }
+                
             }
         }
     }

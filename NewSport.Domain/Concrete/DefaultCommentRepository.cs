@@ -49,6 +49,7 @@ namespace NewSport.Domain.Concrete
             {
                 _dbContext.Comments.RemoveRange(commentsToDelete);
             }
+            _dbContext.SaveChanges();
         }
 
         public int CountCommentsByPostId(Func<Comment, bool> func)

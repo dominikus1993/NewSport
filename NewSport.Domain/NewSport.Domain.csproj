@@ -68,6 +68,7 @@
     <Compile Include="Entities\Role.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Filters\DefaultAuthorize.cs" />
+    <Compile Include="Filters\DefaultRoleProvider.cs" />
     <Compile Include="Migrations\201504252112077_new.cs" />
     <Compile Include="Migrations\201504252112077_new.Designer.cs">
       <DependentUpon>201504252112077_new.cs</DependentUpon>

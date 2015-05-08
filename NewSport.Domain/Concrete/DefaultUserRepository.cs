@@ -30,9 +30,9 @@ namespace NewSport.Domain.Concrete
             get { return _dbContext.Users; }
         }
 
-        public List<string> Roles
+        public IQueryable<Role> Roles
         {
-            get { return new List<string>(_dbContext.Roles.Select(x=>x.Name)); }
+            get { return _dbContext.Roles; }
         }
 
         public void Save(User user)
@@ -57,6 +57,8 @@ namespace NewSport.Domain.Concrete
             {
                 editingUser.Username = user.Username;
                 editingUser.Email = user.Email;
+                editingUser.Avatar = user.Avatar;
+                editingUser.AvatarMimeType = user.AvatarMimeType;
             }
         }
 

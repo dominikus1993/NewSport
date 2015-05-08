@@ -7,7 +7,7 @@
 
 <h2>Add Post</h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit", "Post", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     <div class="form-horizontal">
