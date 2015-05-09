@@ -136,15 +136,18 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="HtmlHelpers\AuthorizationHelper.cs" />
     <Compile Include="HtmlHelpers\PagingHelpers.cs" />
     <Compile Include="HtmlHelpers\TimeHelpers.cs" />
+    <Compile Include="HtmlHelpers\ViewHelpers.cs" />
     <Compile Include="Infrastructure\DefaultDependencyResolver.cs" />
     <Compile Include="Infrastructure\NewSportControllerFactory.cs" />
     <Compile Include="Models\LoggedUserViewModel.cs" />
@@ -164,6 +167,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
+    <Content Include="Scripts\comments.js" />
     <Content Include="Scripts\jquery-2.1.3.js" />
     <Content Include="Scripts\jquery-2.1.3.min.js" />
     <Content Include="Scripts\jquery-2.1.3.min.map" />
@@ -196,12 +200,14 @@
     <Content Include="Views\Post\Index.cshtml" />
     <Content Include="Views\Post\Add.cshtml" />
     <Content Include="Views\Post\Edit.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
     <None Include="Views\Comment\Get.cshtml" />
     <None Include="Views\Comment\GetCommentsAmountByPost.cshtml" />
     <None Include="Views\Post\Get.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

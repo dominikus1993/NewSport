@@ -33,7 +33,7 @@
             </div>
             <div class="row">
                 <div class="col-md-4">
-                    @if (post.ImageData != null)
+                    @if (@Html.IsPostHaveImage(post))
                     {
                         <a href="@Url.Action("Get", "Post", new {post.Id})" class="thumbnail">
                             <img src="@Url.Action("GetImage","Post",new{postId = post.Id})" alt="Nope">

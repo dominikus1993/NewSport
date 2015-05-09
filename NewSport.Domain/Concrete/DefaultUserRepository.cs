@@ -70,6 +70,7 @@ namespace NewSport.Domain.Concrete
             {
                 FormsAuthentication.SetAuthCookie(username, false);
                 HttpContext.Current.Session["user"] = username;
+                HttpContext.Current.Session["role"] = FindByUsername(username).RoleId;
             }
             return loginResult;
         }

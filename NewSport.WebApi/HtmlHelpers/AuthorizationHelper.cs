@@ -21,6 +21,7 @@ namespace NewSport.WebApi.HtmlHelpers
             LoggedUserViewModel loggedUser = new LoggedUserViewModel()
             {
                 Username = HttpContext.Current.Session["user"].ToString()
+               
             };
             return loggedUser;
         }

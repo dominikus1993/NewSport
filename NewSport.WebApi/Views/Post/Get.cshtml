@@ -14,99 +14,49 @@
         OnSuccess = "processData"
     };
 }
+
 <script type="text/javascript">
     function OnFailure(data) {
         alert(data);
         alert("Dupa");
     }
-
-    function dateAgo(date) {
-        var seconds = (new Date().getTime() - date) / 1000;
-        if (seconds < 60) {
-            return parseInt(seconds) + " sekund temu";
-        } else if (seconds >= 60 && seconds < 3600) {
-            return parseInt(seconds / 60) + " minut temu";
-        } else if (seconds >= 3600 && seconds < 86400) {
-            return parseInt(seconds / 3600) + " godzin temu";
-        } else {
-            return parseInt(seconds / 86400) + " dni temu";
-        }
-    }
-
-    function processData(data) {
-        var target = $("#comments");
-        target.empty();
-        target.append("<div class='page-header'>\n"
-            + "<h1><small class='pull-right'>" + data.length + " Comments </small> Comments </h1>\n"
-            + "</div>");
-
-
-        for (var i = data.length - 1; i >= 0; i--) {
-            console.log(data.Message);
-            var comment = data[i];
-            target.append("<div class='comments-list'>\n"
-                + "<div class='media'>\n"
-                + "<p class='pull-right'>\n"
-                + "<small>" + dateAgo(parseInt(comment.CommentsDate.substring(6, comment.CommentsDate.length - 2))) + "</small>\n"
-                + "</p>\n"
-                + "<a class='media-left' href='#'>\n"
-                + "<img src='http://lorempixel.com/40/40/people/1/'>\n"
-                + "</a>\n"
-                + "<div class='media-body'>\n"
-                + "<h4 class='media-heading user_name'>" + comment.Author.Username + "</h4>\n"
-                + comment.Message + "\n"
-                + "<p>"
-                + "<small><a href=''>Like</a> - <a href=''>Share</a></small>"
-                + "</p>"
-                + "</div>"
-                + "</div>"
-                + "</div>");
-        }
-    }
 </script>
+@Scripts.Render("~/bundles/comments")
 <div class="container">
     <div class="row">
-        <section>
-            <div class="page-header">
-                <h1>@Html.DisplayFor(m => Model.Title)</h1>
-
-                <div>
-                    <i>Dodano:</i><time>@Html.HowMuchTimeHasPassedSinceSbAddedComment(Model.Date)</time>
-                    <span>
-                        <i>Przez</i> <span>@Html.DisplayFor(m => Model.Author.Username)</span>
-                    </span>
+        <div class="col-md-12" id="post">
+            <div class="row">
+                <div class="col-md-8">
+                    <h4><strong>@Html.DisplayFor(m => Model.Title)</strong></h4>
+                    <i class="glyphicon glyphicon-user"></i> by @Html.ActionLink(Model.Author.Username, "Index", new { Model.Author.Username, page = 1 })
+                    | <i class="glyphicon glyphicon-calendar"></i> @Html.HowMuchTimeHasPassedSinceSbAddedComment(Model.Date)
                 </div>
+
             </div>
             <div class="row">
-                <div class="col-md-12 columns">
-                    <div class="well">
-                        <div class="row">
-                            <article>
-                                <figure>
+                <div class="col-md-4">
+                    @if (@Html.IsPostHaveImage(Model))
+                    {
+                        <a href="#" class="thumbnail">
+                            <img src="@Url.Action("GetImage","Post",new{postId = Model.Id})" alt="Nope">
+                        </a>
+                    }
 
-                                    @if (Model.ImageData != null)
-                                    {
-                                        <img src="@Url.Action("GetImage", "Post", new {postId = Model.Id})" alt="Nope" class="img-responsive">
-                                    }
-
-                                </figure>
-                                <p>
-                                    @Html.DisplayFor(m => Model.Text)
-                                </p>
-
-                            </article>
-                        </div>
-                    </div>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                        @Html.DisplayFor(m => Model.Text)
+                    </p>
                 </div>
             </div>
-        </section>
+        </div>
         <div id="loadingComments" class="loadComments" style="display: none">
             <p>Ładowanie danych...</p>
         </div>
         <div id="comments">
             @Html.Action("Get", "Comment", new { postId = Model.Id })
         </div>
-        @if (Session["user"] != null)
+        @if (@Html.IsLogged())
         {
             <div>
                 @using (Ajax.BeginForm(ajaxOptions))
